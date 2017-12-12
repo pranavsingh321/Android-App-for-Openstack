@@ -79,10 +79,10 @@ public class App_urls {
                     for (int i = 0; i < jsonArray.getJSONObject(j).getJSONArray("endpoints").length(); i++) {
                         allURLs.put(jsonArray.getJSONObject(j).getString("type"), mapLocalhost(jsonArray.getJSONObject(j).getJSONArray("endpoints").getJSONObject(0).getString("adminURL")));
                         //Instance.computeURL = mapLocalhost(Instance.computeURL);
-                        //Log.d(TAG,"---------------ALL------------------\n");
-                        //Log.d(TAG,jsonArray.getJSONObject(j).getString("type"));
-                        //Log.d(TAG,jsonArray.getJSONObject(j).getJSONArray("endpoints").getJSONObject(0).getString("adminURL"));
-                        //Log.d(TAG,"---------------End------------------\n");
+                        
+                        
+                        
+                        
 
                     }
             }

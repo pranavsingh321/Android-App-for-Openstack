@@ -20,7 +20,7 @@ public class ImagesListAdapter extends RecyclerView.Adapter <ImagesViewHolder>{
     //private static final int START_QUOTES;
     //List<Image> instanceDataset;
     public ImagesListAdapter(){
-        Log.d(TAG,"---------imageLIST-cons----");
+        
         //instanceDataset=(initialize this list);
     }
     @Override
@@ -32,8 +32,8 @@ public class ImagesListAdapter extends RecyclerView.Adapter <ImagesViewHolder>{
     }
     @Override
     public void onBindViewHolder(ImagesViewHolder imagesViewHolder,int i){
-        Log.d(TAG, "------image-adaper bind------");
-        Log.d(TAG,ImagesFragment.ImageList.get(i).getImageName());
+        
+        
         imagesViewHolder.imageName.setText(ImagesFragment.ImageList.get(i).getImageName());
         imagesViewHolder.imageSize.setText(getByteToMB(ImagesFragment.ImageList.get(i).getImageSize()));
         imagesViewHolder.imageFormat.setText(ImagesFragment.ImageList.get(i).getImageType());
@@ -47,8 +47,8 @@ public class ImagesListAdapter extends RecyclerView.Adapter <ImagesViewHolder>{
         return new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG,"----------------------position----------------------------");
-                Log.d(TAG,String.valueOf(position));
+                
+                
                 final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.details_layout);
                 dialog.setTitle("Image Details:");

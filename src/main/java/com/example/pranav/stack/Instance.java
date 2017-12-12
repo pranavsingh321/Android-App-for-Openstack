@@ -34,7 +34,7 @@ public class Instance {
     public static ArrayList<String> servers_status=new ArrayList<>();
 
     public Instance(){
-        //Log.d(TAG,"---------create instance------");
+        
          instanceName = " ";
          instanceID = " ";
          instanceImage = " ";

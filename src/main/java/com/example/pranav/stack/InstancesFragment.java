@@ -70,7 +70,7 @@ public class InstancesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //Log.d(TAG, "---InstanceFragment___");
+      
     }
 
     @Override
@@ -99,9 +99,9 @@ public class InstancesFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder,int direction){
-                //Log.d(TAG, "---Item location----");
-                //Log.d(TAG,String.valueOf(viewHolder.getAdapterPosition()));
-                //Log.d(TAG, String.valueOf(InstanceList.size()));
+              
+              
+              
                 if(viewHolder.getAdapterPosition() < InstanceList.size()) {
                     SendRequest(Request.Method.DELETE,null,getDeleteInstanceURL(InstanceList.get(viewHolder.getAdapterPosition()).getInstanceID()));
                     InstanceList.remove(viewHolder.getAdapterPosition());
@@ -125,7 +125,7 @@ public class InstancesFragment extends Fragment {
                 View btnAdd = dialog.findViewById(R.id.btn_ok);
                 View btnCancel = dialog.findViewById(R.id.btn_cancel);
                 openStackDatabase.getReadableDatabase();
-                ////Log.d(TAG, "---------button-------");
+                
                 List<Flavor> flavorArrayList = new ArrayList<Flavor>();
                 List<Image> imagesArrayList = new ArrayList<Image>();
                 flavorArrayList = openStackDatabase.getAllFlavors();
@@ -139,8 +139,8 @@ public class InstancesFragment extends Fragment {
                 }
                 if (flavorArrayList.size() > 0 && imagesArrayList.size() > 0)
                 {
-                    //Log.d(TAG, flavorArrayList.get(0).getFlavorName());
-                    //Log.d(TAG, imagesArrayList.get(0).getImageName());
+                  
+                  
 
                     ArrayList<String> list_flavors = new ArrayList<String>();
                     for (int index = 0; index < flavorArrayList.size(); index++) {
@@ -163,8 +163,8 @@ public class InstancesFragment extends Fragment {
 
                     btnAdd.setOnClickListener(onConfirmListener(name, count, spnFlavorsList, spnImagesList, dialog));
                     btnCancel.setOnClickListener(onCancelListener(dialog));
-                    //Log.d(TAG, spnFlavorsList.getSelectedItem().toString());
-                    //Log.d(TAG, spnImagesList.getSelectedItem().toString());
+                  
+                  
                     dialog.show();
                 }
                 else
@@ -210,7 +210,7 @@ public class InstancesFragment extends Fragment {
             for (int i = 0; i <jsonObject.getJSONArray("flavors").length(); i++) {
                 Flavor flavor=new Flavor();
                 JSONObject flavorObj=jsonObject.getJSONArray("flavors").getJSONObject(i);
-                //Log.d(TAG, flavorObj.toString());
+              
                 flavor.setFlavorID(flavorObj.getString("id"));
                 flavor.setFlavorName(flavorObj.getString("name"));
                 flavor.setFlavorSize(flavorObj.getString("ram"));
@@ -238,8 +238,8 @@ public class InstancesFragment extends Fragment {
         return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Log.d(TAG,"------------position---------");
-                //Log.d(TAG,String.valueOf(position));
+              
+              
             }
 
             @Override
@@ -278,27 +278,27 @@ public class InstancesFragment extends Fragment {
             flavorArrayList=openStackDatabase.getAllFlavors();
             imageArrayList=openStackDatabase.getAllImages();
             openStackDatabase.close();
-            ////Log.d(TAG, "---------------flavor----------------\n");
+            
             for (int i = 0; i <flavorArrayList.size() ; i++) {
-                ////Log.d(TAG, flavorArrayList.get(i).getFlavorName());
-                ////Log.d(TAG, flavorArrayList.get(i).getFlavorURL());
+                
+                
                 if(flavorArrayList.get(i).getFlavorName().equals(flavor)) {
-                    ////Log.d(TAG, "----match---flavor---");
+                    
                     flavor=flavorArrayList.get(i).getFlavorURL();
                 }
 
             }
-            ////Log.d(TAG, "---------------image----------------\n");
+            
             for (int i = 0; i < imageArrayList.size(); i++) {
-                ////Log.d(TAG, imageArrayList.get(i).getImageName());
-                ////Log.d(TAG, imageArrayList.get(i).getImageID());
+                
+                
                 if (imageArrayList.get(i).getImageName().equals(image)) {
-                    ////Log.d(TAG, "----match---image---");
+                    
                     image=imageArrayList.get(i).getImageID();
                     image=App_urls.HOST_URL.concat("/v2/images/").concat(image);
                 }
             }
-            //Log.d(TAG, "---------------logic----------------\n");
+          
 
             JSONObject server_obj = new JSONObject();
             server_obj.put("name", instanceName);
@@ -313,12 +313,12 @@ public class InstancesFragment extends Fragment {
             server_obj.put("max_count", count);
             retJSON.put("server", server_obj);
 
-            ////Log.d(TAG, "---------------start----------------\n");
-            ////Log.d(TAG, retJSON.toString(2));
-            ////Log.d(TAG, "----------------end----------------");
+            
+            
+            
 
         } catch (JSONException ex) {
-            //Log.d(TAG, "Error Occurred while building JSON");
+          
             ex.printStackTrace();
         }
         return retJSON;
@@ -327,14 +327,14 @@ public class InstancesFragment extends Fragment {
     private void SendRequest(final int requestType,final JSONObject jsonObject,final String url)
     {
         showDialog();
-        //Log.d(TAG,"------------------send request-----------------------");
-        //Log.d(TAG,url);
+      
+      
         JsonObjectRequest request = new JsonObjectRequest(requestType,url,jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         hideDialog();
-                        //Log.d(TAG, response.toString());
+                      
                         if(url.contains("usage") && url.contains("tenant"))
                             getOverview(response);
                         else if (url.contains("image"))
@@ -351,8 +351,8 @@ public class InstancesFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Log.d(TAG, "overview error:");
-                        //Log.d(TAG,error.toString());
+                      
+                      
                         hideDialog();
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -371,8 +371,8 @@ public class InstancesFragment extends Fragment {
                 HashMap<String,String> headers=new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("X-Auth-Token", App_urls.TokenID);
-                ////Log.d(TAG, "--------headers----");
-                ////Log.d(TAG,headers.toString());
+                
+                
                 return headers;
             }
             @Override
@@ -430,13 +430,13 @@ public class InstancesFragment extends Fragment {
 
     }
     public void getNewInstanceDetails(JSONObject jsonObject) {
-        //Log.d(TAG, "-----servers add----");
-        //Log.d(TAG, jsonObject.toString());
+      
+      
 
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             public void run() {
-                //Log.d(TAG, "-----servers sleep----");
+              
                 SendRequest(Request.Method.GET, null, getInstanceURL());
             }
         }, 5000);
@@ -470,32 +470,32 @@ public class InstancesFragment extends Fragment {
     }
     public void getOverview(JSONObject jsonObject)
     {
-        //Log.d(TAG, jsonObject.toString());
+      
         openStackDatabase.getWritableDatabase();
         openStackDatabase.createAllTables(1);
         try {
             for (int i = 0; i <1 /*jsonObject.getJSONArray("tenant_usages").length()*/; i++) {
 
-                ////Log.d(TAG,String.valueOf(jsonObject.getJSONArray("tenant_usages").getJSONObject(i).getJSONArray("server_usages").length()));
+                
                 for (int j = 0; j < jsonObject.getJSONArray("tenant_usages").getJSONObject(i).getJSONArray("server_usages").length(); j++)
                 {
                     Instance instance=new Instance();
                     JSONObject server_det=server_details.getJSONArray("servers").getJSONObject(j);
                     instance.setInstancePowerState(server_det.getString("status"));
-                    Log.d(TAG, "----------------status------------------------");
-                    Log.d(TAG,server_det.getString("status"));
+                
+                
                     instance.setInstanceName(server_det.getString("name"));
                     instance.setTenantID(server_det.getString("tenant_id"));
                     instance.setInstanceID(server_det.getString("id"));
-                    Log.d(TAG,server_det.getJSONObject("addresses").toString());
+                
                     if(server_det.getJSONObject("addresses").has("private") )
                     {
                         if(server_det.getJSONObject("addresses").getJSONArray("private").length()>1)
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("private").getJSONObject(1).getString("addr").toString());
                         else
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("private").getJSONObject(0).getString("addr").toString());
-                        Log.d(TAG, "-----------private--------");
-                         Log.d(TAG, server_det.getJSONObject("addresses").getJSONArray("private").getJSONObject(0).toString());
+                    
+                     
                     }
                     else if(server_det.getJSONObject("addresses").has("public") )
                     {
@@ -503,8 +503,8 @@ public class InstancesFragment extends Fragment {
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("public").getJSONObject(1).getString("addr").toString());
                         else
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("public").getJSONObject(0).getString("addr").toString());
-                        Log.d(TAG, "-----------private--------");
-                        Log.d(TAG, server_det.getJSONObject("addresses").getJSONArray("public").getJSONObject(0).toString());
+                    
+                    
                     }
                     else if(server_det.getJSONObject("addresses").has("IPNA"))
                     {
@@ -512,28 +512,28 @@ public class InstancesFragment extends Fragment {
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("IPNA").getJSONObject(1).getString("addr").toString());
                         else
                             instance.setInstanceIPAddr(server_det.getJSONObject("addresses").getJSONArray("IPNA").getJSONObject(0).getString("addr").toString());
-                        //Log.d(TAG, "-----------overview -begin----");
-                        //Log.d(TAG, server_det.getJSONObject("addresses").getJSONArray("IPNA").getJSONObject(0).toString());
+                      
+                      
 
                     }
 
 
                     JSONObject server=jsonObject.getJSONArray("tenant_usages").getJSONObject(i).getJSONArray("server_usages").getJSONObject(j);
-                    //Log.d(TAG, "-----------overview -if----");
-                    //Log.d(TAG,"----------2------");
+                  
+                  
                     instance.setInstanceRAM(server.getString("memory_mb"));
                     instance.setInstanceVCU(server.getString("vcpus"));
-                    //Log.d(TAG, "----------3------");
+                  
                     instance.setInstanceRunningTime(server.getString("uptime"));
                     instance.setInstanceFlavor(server.getString("flavor"));
-                    //Log.d(TAG,instance.getInstanceName());
-                    //Log.d(TAG,instance.getInstanceID());
-                    //Log.d(TAG,instance.getInstancePowerState());
-                    //Log.d(TAG,instance.getInstanceRAM());
-                    //Log.d(TAG,instance.getInstanceIPAddr());
-                    //Log.d(TAG,instance.getInstanceVCU());
-                    //Log.d(TAG,instance.getInstanceRunningTime());
-                    //Log.d(TAG, instance.getInstanceFlavor());
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                     openStackDatabase.insertInstance(instance);
 
                 }
@@ -543,8 +543,8 @@ public class InstancesFragment extends Fragment {
             instancesListAdapter.notifyDataSetChanged();
             openStackDatabase.close();
         }catch (JSONException js){
-            //Log.d(TAG,"-----------overview exception-----");
-            //Log.d(TAG,js.toString());
+          
+          
             openStackDatabase.close();
         }
         /*
@@ -574,7 +574,7 @@ public class InstancesFragment extends Fragment {
         SendRequest(Request.Method.GET, null, getFlavorURL());
         //mHandler.removeCallbacks(thread);
         //mHandler.postDelayed(thread, 0);
-        //Log.d(TAG, "onResume");
+      
         //InstanceList=openStackDatabase.getAllInstances();
     }
 
@@ -582,7 +582,7 @@ public class InstancesFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         //mHandler.removeCallbacks(thread);
-        //Log.d(TAG, "onPause");
+      
         openStackDatabase.close();
     }
     private void showDialog() {

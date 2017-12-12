@@ -57,7 +57,7 @@ public class FlavorsFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "---FlavorFragment___");
+    
     }
 
     @Override
@@ -107,7 +107,7 @@ public class FlavorsFragment extends Fragment{
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder,int direction){
-                Log.d(TAG, "---Item location----");
+            
                 if(viewHolder.getAdapterPosition() < FlavorList.size())
                     FlavorList.remove(viewHolder.getAdapterPosition());
                 flavorsListAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
@@ -172,21 +172,21 @@ public class FlavorsFragment extends Fragment{
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Log.d(TAG, response.toString());
+                      
                         hideDialog();
-                        Log.d(TAG, "Response-flavor2--------");
+                    
                         if(url.contains("detail"))
                           getFlavorsDetails(response);
                         else
                             SendRequest(null, getFlavorURL());
-                        Log.d(TAG, response.toString());
+                    
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "overview error:");
-                        Log.d(TAG,error.toString());
+                    
+                    
                         hideDialog();
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -204,8 +204,8 @@ public class FlavorsFragment extends Fragment{
                 HashMap<String,String> headers=new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("X-Auth-Token",App_urls.TokenID);
-                Log.d(TAG, "--------headers----");
-                Log.d(TAG,headers.toString());
+            
+            
                 return headers;
             }
             @Override
@@ -226,7 +226,7 @@ public class FlavorsFragment extends Fragment{
             for (int i = 0; i <jsonObject.getJSONArray("flavors").length(); i++) {
                 Flavor flavor=new Flavor();
                 JSONObject flavorObj=jsonObject.getJSONArray("flavors").getJSONObject(i);
-                Log.d(TAG,flavorObj.toString());
+            
                 flavor.setFlavorID(flavorObj.getString("id"));
                 flavor.setFlavorName(flavorObj.getString("name"));
                 flavor.setFlavorSize(flavorObj.getString("ram"));
@@ -234,7 +234,7 @@ public class FlavorsFragment extends Fragment{
                 flavor.setFlavorURL(flavorObj.getJSONArray("links").getJSONObject(0).getString("href"));
                 openStackDatabase.insertFlavor(flavor);
                 FlavorList=openStackDatabase.getAllFlavors();
-                Log.d(TAG,String.valueOf(FlavorList.size()));
+            
                 flavorsListAdapter.notifyDataSetChanged();
             }
 

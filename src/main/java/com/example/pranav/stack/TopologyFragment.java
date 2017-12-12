@@ -25,7 +25,7 @@ public class TopologyFragment extends Fragment {
     public void onCreate(Bundle savedTopologyState) {
 
         super.onCreate(savedTopologyState);
-        Log.d(TAG, "---TopologyFragment---");
+        
     }
 
     @Override
@@ -54,11 +54,11 @@ public class TopologyFragment extends Fragment {
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
 
-            Log.d(TAG, String.valueOf(width));
-            Log.d(TAG, String.valueOf(height));
-            Log.d(TAG, String.valueOf(half_width));
-            Log.d(TAG, String.valueOf(half_height));
-            Log.d(TAG, "------------------------------");
+            
+            
+            
+            
+            
             x_index[0]=30;
             y_index[0]=30;
 
@@ -133,12 +133,12 @@ public class TopologyFragment extends Fragment {
                        canvas.drawBitmap(node, x_index[i], y_index[j], paint);
 
 
-                    Log.d(TAG, "-------------loop-----------------");
-                    Log.d(TAG, String.valueOf(i));
-                    Log.d(TAG,String.valueOf(j));
-                    Log.d(TAG,String.valueOf(x_index[i]));
-                    Log.d(TAG,String.valueOf(y_index[j]));
-                    Log.d(TAG, "---------------loop end---------------");
+                    
+                    
+                    
+                    
+                    
+                    
                     paint.setTextSize(50.0f);
                     paint.setStrokeWidth(60);
                     paint.setColor(getContext().getResources().getColor(R.color.colorAccent));

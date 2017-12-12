@@ -50,7 +50,7 @@ public class ImagesFragment extends Fragment {
     public void onCreate(Bundle savedImagestate) {
 
         super.onCreate(savedImagestate);
-        Log.d(TAG, "---ImageFragment---");
+ 
     }
 
     @Override
@@ -79,8 +79,8 @@ public class ImagesFragment extends Fragment {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder,int direction){
-                Log.d(TAG, "---Item location----");
-                Log.d(TAG, "---Item location----");
+         
+         
 
                 if(viewHolder.getAdapterPosition() < ImageList.size()) {
                     ImageList.remove(viewHolder.getAdapterPosition());
@@ -100,18 +100,18 @@ public class ImagesFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Log.d(TAG, response.toString());
+                   
                         hideDialog();
                         getImageDetails(response);
-                        Log.d(TAG, "Response-image--------");
-                        Log.d(TAG, response.toString());
+                 
+                 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "overview error:");
-                        Log.d(TAG,error.toString());
+                 
+                 
                         hideDialog();
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -129,8 +129,8 @@ public class ImagesFragment extends Fragment {
                 HashMap<String,String> headers=new HashMap<String,String>();
                 headers.put("Content-Type", "application/json; charset=utf-8");
                 headers.put("X-Auth-Token",App_urls.TokenID);
-                Log.d(TAG, "--------headers----");
-                Log.d(TAG,headers.toString());
+         
+         
                 return headers;
             }
             @Override

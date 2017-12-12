@@ -84,7 +84,7 @@ public class LoginActivity extends Activity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG,"----------click-2-----");
+              
                 String username=editUsername.getText().toString();
                 App_urls.Username=editUsername.getText().toString();
                 String password=editPassword.getText().toString();
@@ -94,7 +94,7 @@ public class LoginActivity extends Activity {
                 Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                 startActivityForResult(intent, requestCode);
                 App_urls.URL_LOGIN = App_urls.HOST_URL.concat(":5000/v2.0/tokens");
-                Log.d(TAG,App_urls.HOST);
+              
                 if(username.trim().length()>0 && password.trim().length()>0 && hostIP.trim().length()>0)
                 {
                     current_session.setLogin(false,username,hostIP);
@@ -111,8 +111,8 @@ public class LoginActivity extends Activity {
 
         private void start_login(final String tenantName,final String username, final String password)
         {
-            Log.d(TAG, "-----checklogin------");
-            Log.d(TAG,App_urls.URL_LOGIN);
+          
+          
             SendRequest(CreateLoginJSONObject(tenantName, username, password), App_urls.URL_LOGIN);
         }
 
@@ -123,10 +123,10 @@ public class LoginActivity extends Activity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(TAG, response.toString());
+                      
                         setLoginPOSTResponse(response);
-                        Log.d(TAG, "Response---------");
-                        Log.d(TAG, App_urls.loginJSON.toString());
+                      
+                      
                         btnSignIn.setProgress(100);
                         //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                     }
@@ -134,8 +134,8 @@ public class LoginActivity extends Activity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "error:");
-                        Log.d(TAG,error.toString());
+                      
+                      
                         btnSignIn.setProgress(-1);
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -170,19 +170,19 @@ public class LoginActivity extends Activity {
     private void setLoginPOSTResponse(JSONObject jsonObject){
         App_urls.loginJSON=jsonObject;
         if(App_urls.loginJSON.toString().equals("{}")){
-            Log.d(TAG,App_urls.loginJSON.toString());
+          
             return;
         } else {
-            //Log.d(TAG, "-----token------");
-            //Log.d(TAG, app_urls.getTokenID(App_urls.loginJSON));
+            
+            
             app_urls.getAllURLs(App_urls.loginJSON);
             //SendRequest(null, temp);
 
             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
             startActivityForResult(intent, requestCode);
             //finish();
-            //Log.d(TAG,"-----tenant------");
-            //Log.d(TAG, app_urls.getTenantID((App_urls.loginJSON)));
+            
+            
 
             return;
         }
@@ -192,11 +192,11 @@ public class LoginActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         btnSignIn.setProgress(0);
         if(resultCode != RESULT_OK){
-            Log.d(TAG,"--------check if logout not pressed-----------");
+          
             finish();
         }
         else
-            Log.d(TAG,"--------check if logout is pressed-----------");
+          
     }
 
     private void setRequestErrorResponse(String s){
@@ -226,12 +226,12 @@ public class LoginActivity extends Activity {
             auth.put("passwordCredentials", password_cred);
 
             retJSON.put("auth", auth);
-            //Log.d(TAG, "---------------start----------------\n");
-            //Log.d(TAG, retJSON.toString(2));
-            //Log.d(TAG, "----------------end----------------");
+            
+            
+            
 
         } catch (JSONException ex) {
-            Log.d(TAG, "Error Occurred while building JSON");
+          
             ex.printStackTrace();
         }
         return retJSON;

@@ -51,7 +51,7 @@ public class VolumesFragment extends Fragment{
     public void onCreate(Bundle savedVolumestate) {
 
         super.onCreate(savedVolumestate);
-        Log.d(TAG, "---VolumeFragment___");
+      
     }
 
     @Override
@@ -79,7 +79,7 @@ public class VolumesFragment extends Fragment{
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder,int direction){
-                Log.d(TAG, "---Item location----");
+              
                 if(viewHolder.getAdapterPosition() < VolumeList.size())
                      VolumeList.remove(viewHolder.getAdapterPosition());
                 /*
@@ -104,18 +104,18 @@ public class VolumesFragment extends Fragment{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Log.d(TAG, response.toString());
+                        
                         hideDialog();
                         getVolumeDetails(response);
-                        Log.d(TAG, "Response-volume--------");
-                        Log.d(TAG, response);
+                      
+                      
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "overview error:");
-                        Log.d(TAG,error.toString());
+                      
+                      
                         hideDialog();
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -133,8 +133,8 @@ public class VolumesFragment extends Fragment{
                 HashMap<String,String> headers=new HashMap<String,String>();
                 headers.put("Content-Type", "application/xml; charset=utf-8");
                 headers.put("X-Auth-Token",App_urls.TokenID);
-                Log.d(TAG, "--------headers----");
-                Log.d(TAG,headers.toString());
+              
+              
                 return headers;
             }
             @Override
@@ -157,7 +157,7 @@ public class VolumesFragment extends Fragment{
                 volume.setVolumeSize(volumeObj.getString("size"));
                 volume.setVolumeType(volumeObj.getString("volume_type"));
                 volume.setVolumeStatus(volumeObj.getString("status"));
-                Log.d(TAG,volume.getVolumeName());
+              
                 openStackDatabase.insertVolume(volume);
                 VolumeList=openStackDatabase.getAllVolumes();
                 volumesListAdapter.notifyDataSetChanged();

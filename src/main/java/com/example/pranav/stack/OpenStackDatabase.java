@@ -70,11 +70,11 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
 
     public OpenStackDatabase (Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //Log.d(TAG, "-------constructor----");
+        
     }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //Log.d(TAG, "----create db--");
+        
         //dropAllTables();
         createTenantTable(sqLiteDatabase);
         createInstanceTable(sqLiteDatabase);
@@ -92,35 +92,35 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(DELETE_TENANT_TABLE);
         String CREATE_TENANT_TABLE="CREATE TABLE"+WHITESPACE+TENANT_TABLE+OPENINGBRACKETS+TENANT_ID+TEXT+","+TENANT_NAME+WHITESPACE+TEXT+","+TENANT_ZONE+TEXT+","+TENANT_RAM+WHITESPACE+TEXT+","+TENANT_VCPU+WHITESPACE+TEXT+","+TENANT_INSTANCES+WHITESPACE+TEXT+CLOSINGBRACKETS;
         sqLiteDatabase.execSQL(CREATE_TENANT_TABLE);
-        //Log.d(TAG, CREATE_TENANT_TABLE);
+        
     }
     public void createInstanceTable(SQLiteDatabase sqLiteDatabase){
         String DELETE_INSTANCE_TABLE = "DROP TABLE IF EXISTS "+WHITESPACE+INSTANCE_TABLE+";";
         sqLiteDatabase.execSQL(DELETE_INSTANCE_TABLE);
         String CREATE_INSTANCE_TABLE="CREATE TABLE"+WHITESPACE+INSTANCE_TABLE+OPENINGBRACKETS+INSTANCE_ID+TEXT+","+INSTANCE_NAME+TEXT+","+INSTANCE_IMAGE+TEXT+","+INSTANCE_IPADDR+TEXT+","+INSTANCE_POWERSTATE+TEXT+","+INSTANCE_SIZE+TEXT+","+INSTANCE_RAM+TEXT+","+TENANT_ID+TEXT+","+INSTANCE_RUNNINGTIME+TEXT+","+INSTANCE_VCPU+TEXT+","+INSTANCE_URL+TEXT+","+INSTANCE_FLAVOR+TEXT+CLOSINGBRACKETS;
         sqLiteDatabase.execSQL(CREATE_INSTANCE_TABLE);
-        //Log.d(TAG, CREATE_INSTANCE_TABLE);
+        
     }
     public void createImageTable(SQLiteDatabase sqLiteDatabase){
         String DELETE_IMAGE_TABLE = "DROP TABLE IF EXISTS "+WHITESPACE+IMAGE_TABLE+";";
         sqLiteDatabase.execSQL(DELETE_IMAGE_TABLE);
         String CREATE_IMAGE_TABLE="CREATE TABLE"+WHITESPACE+IMAGE_TABLE+OPENINGBRACKETS+IMAGE_ID+TEXT+","+IMAGE_NAME+TEXT+","+IMAGE_TYPE+TEXT+","+IMAGE_STATE+TEXT+","+IMAGE_SIZE+TEXT+","+IMAGE_URL+TEXT+CLOSINGBRACKETS;
         sqLiteDatabase.execSQL(CREATE_IMAGE_TABLE);
-        //Log.d(TAG, CREATE_IMAGE_TABLE);
+        
     }
     public void createVolumeTable(SQLiteDatabase sqLiteDatabase){
         String DELETE_VOLUME_TABLE = "DROP TABLE IF EXISTS "+WHITESPACE+VOLUME_TABLE+";";
         sqLiteDatabase.execSQL(DELETE_VOLUME_TABLE);
         String CREATE_VOLUME_TABLE="CREATE TABLE"+WHITESPACE+VOLUME_TABLE+OPENINGBRACKETS+VOLUME_ID+TEXT+","+VOLUME_NAME+TEXT+","+VOLUME_SIZE+TEXT+","+VOLUME_STATUS+TEXT+","+VOLUME_TYPE+TEXT+CLOSINGBRACKETS;
         sqLiteDatabase.execSQL(CREATE_VOLUME_TABLE);
-        //Log.d(TAG, CREATE_VOLUME_TABLE);
+        
     }
     public void createFlavorTable(SQLiteDatabase sqLiteDatabase){
         String DELETE_FLAVOR_TABLE = "DROP TABLE IF EXISTS "+WHITESPACE+FLAVOR_TABLE+";";
         sqLiteDatabase.execSQL(DELETE_FLAVOR_TABLE);
         String CREATE_FLAVOR_TABLE="CREATE TABLE"+WHITESPACE+FLAVOR_TABLE+OPENINGBRACKETS+FLAVOR_ID+TEXT+","+FLAVOR_NAME+TEXT+","+FLAVOR_SIZE+TEXT+","+FLAVOR_DISK+TEXT+","+FLAVOR_URL+TEXT+CLOSINGBRACKETS;
         sqLiteDatabase.execSQL(CREATE_FLAVOR_TABLE);
-        //Log.d(TAG, CREATE_FLAVOR_TABLE);
+        
     }
 
     public void insertTenant(Tenant tenant){
@@ -140,8 +140,8 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         Cursor cursor=null;
         try {
             String query ="UPDATE "+ INSTANCE_TABLE + " SET "+ INSTANCE_IPADDR + " = \""+instance.getInstanceIPAddr()+"\""+ " WHERE " + INSTANCE_NAME + " = \""+instance.getInstanceName()+"\"";
-           //Log.d(TAG,query);
-           //Log.d(TAG, "------------Update INSTANCE---------------");
+           
+           
             cursor = database.rawQuery(query, null);
         } catch (SQLException e){
         }
@@ -151,17 +151,17 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
     }
     public void insertInstance(Instance instance) {
         SQLiteDatabase database = this.getWritableDatabase();
-       //Log.d(TAG, "------------INSERT INSTANCE---------------");
-       //Log.d(TAG, instance.getInstanceName());
+       
+       
         Cursor cursor=null;
         try {
             String query = "SELECT * FROM "
                     + INSTANCE_TABLE + " WHERE " + INSTANCE_ID + " = \"" + instance.getInstanceID()+"\"";
-           //Log.d(TAG,query);
+           
             cursor = database.rawQuery(query, null);
             if(cursor==null||cursor.moveToFirst()==false){
 
-               //Log.d(TAG, "------------INSERT INSTANCE--if-------------");
+               
                 ContentValues values = new ContentValues();
                 values.put(INSTANCE_ID, instance.getInstanceID());
                 values.put(INSTANCE_NAME, instance.getInstanceName());
@@ -188,14 +188,14 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor=null;
 
-       //Log.d(TAG, "------------INSERT Image---------------");
+       
         try {
             String query = "SELECT * FROM "
                     + IMAGE_TABLE + " WHERE " + IMAGE_ID + " = \"" + image.getImageID()+"\"";
-           //Log.d(TAG,query);
+           
             cursor = database.rawQuery(query, null);
             if(cursor == null || cursor.moveToFirst()==false){
-               //Log.d(TAG, "------------INSERT Image--if-------------");
+               
                 ContentValues values = new ContentValues();
                 values.put(IMAGE_ID,image.getImageID());
                 values.put(IMAGE_NAME,image.getImageName());
@@ -214,15 +214,15 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         Cursor cursor=null;
         SQLiteDatabase database = this.getWritableDatabase();
 
-       //Log.d(TAG, "------------INSERT flavor---------------");
+       
         try {
             String query = "SELECT * FROM "
                     + FLAVOR_TABLE + " WHERE " + FLAVOR_ID + " = \"" + flavor.getFlavorID()+"\"";
-           //Log.d(TAG, query);
+           
             cursor = database.rawQuery(query, null);
             if(cursor.moveToFirst()==false){
 
-               //Log.d(TAG, "------------INSERT flavor--if-------------");
+               
                 ContentValues values = new ContentValues();
                 values.put(FLAVOR_ID, flavor.getFlavorID());
                 values.put(FLAVOR_NAME, flavor.getFlavorName());
@@ -263,7 +263,7 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         }
         catch (SQLException ex)
         {
-           //Log.d(TAG,"--------TABLE DOES NOT EXIST____");
+           
         }
         sqLiteDatabase.close();
     }
@@ -280,7 +280,7 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
         }
         catch (SQLException ex)
         {
-           //Log.d(TAG,"--------TABLE DOES NOT EXIST____");
+           
         }
         sqLiteDatabase.close();
     }
@@ -308,11 +308,11 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
                 instance.setInstanceURL(cursor.getString(10));
                 instance.setInstanceFlavor(cursor.getString(11));
                 instanceList.add(instance);
-               //Log.d(TAG, "------instance-rows---------");
-               //Log.d(TAG, instance.getInstanceIPAddr());
-               //Log.d(TAG, instance.getInstanceName());
-               //Log.d(TAG, instance.getInstanceImage());
-               //Log.d(TAG, "------instance-rows-end--------");
+               
+               
+               
+               
+               
             } while (cursor.moveToNext());
         }
     }catch (SQLiteException exception){
@@ -336,8 +336,8 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
                 image.setImageState(cursor.getString(3));
                 image.setImageSize(cursor.getString(4));
                 imageList.add(image);
-               //Log.d(TAG, "------image-rows---------");
-               //Log.d(TAG, image.getImageName());
+               
+               
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -359,8 +359,8 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
                 volume.setVolumeStatus(cursor.getString(3));
                 volume.setVolumeType(cursor.getString(4));
                 volumeList.add(volume);
-               //Log.d(TAG, "------volume-rows---------");
-               //Log.d(TAG,volume.getVolumeName());
+               
+               
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -370,7 +370,7 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
     public List<Flavor>getAllFlavors(){
         List<Flavor>FlavorList=new ArrayList<Flavor>();
 
-       //Log.d(TAG, "-----all-flavor-rows---------");
+       
         String query = "Select * from"+WHITESPACE+FLAVOR_TABLE;
         SQLiteDatabase database=this.getReadableDatabase();
         Cursor cursor=database.rawQuery(query,null);
@@ -383,8 +383,8 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
                 flavor.setFlavorDisk(cursor.getString(3));
                 flavor.setFlavorURL(cursor.getString(4));
                 FlavorList.add(flavor);
-               //Log.d(TAG, "------flavor-rows---------");
-               //Log.d(TAG,flavor.getFlavorName());
+               
+               
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -394,7 +394,7 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
     public List<Tenant>getAllTenantDetails(){
         List<Tenant>TenantList=new ArrayList<Tenant>();
 
-       //Log.d(TAG, "-----all-tenant-rows---------");
+       
         String query = "Select * from"+WHITESPACE+TENANT_TABLE;
         SQLiteDatabase database=this.getReadableDatabase();
         Cursor cursor=database.rawQuery(query,null);
@@ -408,8 +408,8 @@ public class OpenStackDatabase extends SQLiteOpenHelper{
                 tenant.setTotal_vcpus(cursor.getString(4));
                 tenant.setTotal_instances(cursor.getString(5));
                 TenantList.add(tenant);
-               //Log.d(TAG, "------tenant-rows---------");
-               //Log.d(TAG,tenant.getTenantName());
+               
+               
             }while (cursor.moveToNext());
         }
         cursor.close();

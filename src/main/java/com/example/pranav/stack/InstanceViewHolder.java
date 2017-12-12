@@ -37,7 +37,7 @@ public class InstanceViewHolder extends RecyclerView.ViewHolder {
 
                 dialog.show();
                 */
-                Log.d("-----","----clicked----");
+                
             }
         });
         instanceName=(TextView)itemView.findViewById(R.id.textView_instance_name);

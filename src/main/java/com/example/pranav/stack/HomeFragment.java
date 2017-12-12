@@ -106,15 +106,15 @@ showDialog();
                     @Override
                     public void onResponse(JSONObject response) {
 hideDialog();
-                        //Log.d(TAG,response.toString());
+                        
                         getLimits(response);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d(TAG, "overview error:");
-                        Log.d(TAG,error.toString());
+                        
+                        
                         hideDialog();
                         if(error instanceof TimeoutError || error instanceof NoConnectionError)
                         {
@@ -147,7 +147,7 @@ hideDialog();
 
 
     public void getLimits(JSONObject jsonObject) {
-        Log.d(TAG,jsonObject.toString());
+        
         Tenant tenant_tmp=new Tenant();
         openStackDatabase.getWritableDatabase();
         openStackDatabase.createAllTables(0);
@@ -170,16 +170,16 @@ hideDialog();
         openStackDatabase.close();
     }
 
-        Log.d(TAG,"--------get--limits values-----");
-        Log.d(TAG,tenant_tmp.getTenantAvailabilityZone());
-        Log.d(TAG, tenant_tmp.getTotal_instances());
-        Log.d(TAG, tenant_tmp.getTotal_ram());
-        Log.d(TAG, tenant_tmp.getTotal_vcpus());
-        Log.d(TAG,"--------get--limits cal-----");
-        Log.d(TAG, tenant.getTenantAvailabilityZone());
-        Log.d(TAG, tenant.getTotal_instances());
-        Log.d(TAG, tenant.getTotal_ram());
-        Log.d(TAG, tenant.getTotal_vcpus());
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         String tmp="";
         tmp=tmp.concat("INSTANCES").concat("\n    ").concat(tenant.getTotal_instances()).concat("/").concat(tenant_tmp.getTotal_instances());
@@ -259,7 +259,7 @@ hideDialog();
         if(limitURL != null)
           limitURL=limitURL.concat("/limits");
 
-        Log.d(TAG,limitURL);
+        
         return limitURL;
     }
     public int getPercentage(int value,int limit){

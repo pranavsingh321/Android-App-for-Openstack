@@ -21,7 +21,7 @@ public class FlavorsListAdapter extends RecyclerView.Adapter <FlavorsViewHolder>
     //List<flavor> flavorDataset;
     public FlavorsListAdapter(){
         //flavorDataset=(initialize this list);
-        //Log.d(TAG, "-------adaper flavor------");
+        
     }
     @Override
     public FlavorsViewHolder onCreateViewHolder(ViewGroup viewGroup,int i){
@@ -31,7 +31,7 @@ public class FlavorsListAdapter extends RecyclerView.Adapter <FlavorsViewHolder>
     }
     @Override
     public void onBindViewHolder(FlavorsViewHolder flavorsViewHolder,int i){
-        //Log.d(TAG, "-------adaper bind------");
+        
 
         flavorsViewHolder.flavorName.setText(FlavorsFragment.FlavorList.get(i).getFlavorName());
         flavorsViewHolder.flavorSize.setText(getMBToGB(FlavorsFragment.FlavorList.get(i).getFlavorSize()));
@@ -48,8 +48,8 @@ public class FlavorsListAdapter extends RecyclerView.Adapter <FlavorsViewHolder>
         return new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG,"----------------------position----------------------------");
-                Log.d(TAG,String.valueOf(position));
+              
+              
                 final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.details_layout);
                 dialog.setTitle("Flavor Details:");

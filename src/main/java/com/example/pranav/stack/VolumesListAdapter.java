@@ -21,7 +21,7 @@ public class VolumesListAdapter extends RecyclerView.Adapter <VolumesViewHolder>
     //List<Volume> volumeDataset;
     public VolumesListAdapter(){
         //volumeDataset=(initialize this list);
-        Log.d(TAG, "-------adaper constructor------");
+        
     }
     @Override
     public VolumesViewHolder onCreateViewHolder(ViewGroup viewGroup,int i){
@@ -31,7 +31,7 @@ public class VolumesListAdapter extends RecyclerView.Adapter <VolumesViewHolder>
     }
     @Override
     public void onBindViewHolder(VolumesViewHolder volumeViewHolder,int i){
-        Log.d(TAG, "-------adaper bind------");
+        
         volumeViewHolder.volumeName.setText(VolumesFragment.VolumeList.get(i).getVolumeName());
         volumeViewHolder.volumeType.setText(VolumesFragment.VolumeList.get(i).getVolumeType());
         volumeViewHolder.volumeSize.setText(VolumesFragment.VolumeList.get(i).getVolumeSize().concat("GB"));
@@ -51,8 +51,8 @@ public class VolumesListAdapter extends RecyclerView.Adapter <VolumesViewHolder>
         return new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.d(TAG,"----------------------position----------------------------");
-                Log.d(TAG,String.valueOf(position));
+                
+                
                 final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.details_layout);
                 dialog.setTitle("Volume Details:");

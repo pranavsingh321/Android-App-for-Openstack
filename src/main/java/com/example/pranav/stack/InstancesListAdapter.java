@@ -27,7 +27,7 @@ public class InstancesListAdapter extends RecyclerView.Adapter <InstanceViewHold
 
 
         //instanceDataset=(initialize this list);
-        //Log.d(TAG, "-------adaper constructor------");
+      
     }
     @Override
     public InstanceViewHolder onCreateViewHolder(ViewGroup viewGroup,int i){
@@ -37,7 +37,7 @@ public class InstancesListAdapter extends RecyclerView.Adapter <InstanceViewHold
     }
     @Override
     public void onBindViewHolder(InstanceViewHolder instanceViewHolder,int i){
-        //Log.d(TAG, "-------adaper bind------");
+      
         instanceViewHolder.instanceName.setText(InstancesFragment.InstanceList.get(i).getInstanceName());
         instanceViewHolder.instanceIPAddr.setText(InstancesFragment.InstanceList.get(i).getInstanceIPAddr());
         instanceViewHolder.instanceRunningTime.setText(secondsToDays(InstancesFragment.InstanceList.get(i).getInstanceRunningTime()));
@@ -68,8 +68,8 @@ public class InstancesListAdapter extends RecyclerView.Adapter <InstanceViewHold
         return new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                //Log.d(TAG,"----------------------position----------------------------");
-                //Log.d(TAG,String.valueOf(position));
+              
+              
                 final Dialog dialog = new Dialog(v.getContext());
                 dialog.setContentView(R.layout.details_layout);
                 dialog.setTitle("         Instance Details:");
@@ -114,9 +114,9 @@ public class InstancesListAdapter extends RecyclerView.Adapter <InstanceViewHold
                 hours = (sec / 3600) % 24;
                 if (sec > 60)
                     mins = sec / 60;
-                //Log.d(TAG,"-------------datetime--------------");
-                //Log.d(TAG,String.valueOf(days));
-                //Log.d(TAG,String.valueOf(hours));
+              
+              
+              
                 if (days > 0)
                     seconds = seconds.valueOf(days).concat(" days,");
                 else
@@ -134,9 +134,9 @@ public class InstancesListAdapter extends RecyclerView.Adapter <InstanceViewHold
             else
               return seconds.concat("seconds");
 
-            ////Log.d(TAG,"-------------datetime--------------");
-            ////Log.d(TAG,String.valueOf(days));
-            ////Log.d(TAG,String.valueOf(hours));
+            
+            
+            
 
         }
         return seconds;
